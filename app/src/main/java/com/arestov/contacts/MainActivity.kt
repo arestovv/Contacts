@@ -4,8 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.arestov.contacts.model.Contact
-import com.arestov.contacts.ui.ContactDetails
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import com.arestov.contacts.ui.theme.ContactsTheme
 
 class MainActivity : ComponentActivity() {
@@ -14,18 +19,31 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ContactsTheme {
-                ContactDetails(
-                    Contact(
-                        name = "Евгений",
-                        surname = "Андреевич",
-                        familyName = "Лукашин",
-                        isFavorite = true,
-                        phone = "+7 495 495 95 95",
-                        address = "г. Москва, 3-я улица Строителей, д. 25, кв. 12",
-                        email = "ELukashin@practicum.ru"
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    Greeting(
+                        name = "Android",
+                        modifier = Modifier.padding(innerPadding)
                     )
-                )
+                }
             }
         }
     }
 }
+
+@Composable
+fun Greeting(name: String, modifier: Modifier = Modifier) {
+    Text(
+        text = "Hello $name!",
+        modifier = modifier
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    ContactsTheme {
+        Greeting("Android")
+    }
+}
+
+
